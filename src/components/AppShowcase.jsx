@@ -10,6 +10,13 @@ const ShowcaseSection = styled.section`
   overflow: hidden;
   padding-top: 150px;
   padding-bottom: 150px;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
   
   &::before {
     content: '';
@@ -91,6 +98,7 @@ const ShowcasePhone = styled(motion.div)`
   left: 50%;
   top: 50%;
   transform-style: preserve-3d;
+  transform: translate(-50%, -50%); // Add this line
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     width: 200px;
@@ -532,12 +540,14 @@ function AppShowcase() {
       
       gsap.to(phone, {
         duration: 1.2,
-        x,
+        x: x,
         z: zPos,
         rotationY: -angle,
         ease: "power2.inOut",
         opacity: i === index ? 1 : 0.6,
-        scale: i === index ? 1.1 : 0.9
+        scale: i === index ? 1.1 : 0.9,
+        // Use transformOrigin to maintain proper center during rotation
+        transformOrigin: "center center"
       });
     });
   };
